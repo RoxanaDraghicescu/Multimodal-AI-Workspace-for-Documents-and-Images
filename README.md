@@ -158,7 +158,7 @@ Soluții posibile, de decis la proiectare:
 
 ### 2.6 Tehnologii pe care le folosesc
 
-- **Frontend:** React + TypeScript
+- **Interfață:** varianta web (React + TypeScript) sau varianta mobilă (React Native + Expo + TypeScript)
 - **Backend:** Python + FastAPI
 - **Bază de date:** PostgreSQL + pgvector (metadate și embeddings)
 - **Parsare documente:** Docling, PyMuPDF
@@ -176,7 +176,7 @@ Soluții posibile, de decis la proiectare:
 
 | Componentă | Responsabilitate |
 |---|---|
-| Client web | Încărcare fișiere, previzualizare, chat, extracție, comparare. |
+| Client (web sau mobil) | Încărcare fișiere, previzualizare, chat, extracție, comparare. |
 | Backend / API | Autentificare, fișiere, metadate, persistență, orchestrarea apelurilor către Claude. |
 | Pipeline documente | Extracție text, chunking, embeddings, căutare vectorială. |
 | Strat multimodal | Claude (vision) pentru capturi, diagrame și pagini complexe vizual. |
@@ -191,15 +191,32 @@ Soluții posibile, de decis la proiectare:
 - **Extracție structurată** cu scheme explicite și validare programatică.
 - **Comparare:** extrag fapte din ambele surse și le potrivesc una câte una (satisfăcută / contrazisă / nevăzută).
 
+### Interfața: variantă web sau variantă mobilă
+
+Toată partea de AI (Claude, RAG, extracție structurată), baza de date și validarea rămân în backend, pe un server în cloud. Interfața doar trimite fișiere și întrebări către backend și afișează răspunsurile, deci backend-ul este același în ambele variante. Cheile API rămân doar pe server.
+
+| | Varianta web | Varianta mobilă |
+|---|---|---|
+| **Tehnologie** | React + TypeScript (site accesibil din browser) | React Native + Expo + TypeScript (aplicație pentru Android și iPhone) |
+| **Cum o folosește utilizatorul** | Deschide un link în browser, fără instalare | Instalează aplicația (APK sau Expo) |
+| **Încărcare fișiere** | Selectare de pe calculator, drag and drop | Selectare din telefon, partajare dintr-o altă aplicație, poză făcută direct cu camera |
+| **Previzualizarea PDF-urilor lungi** | Mai comodă, ecran mare | Mai greu de citit, trebuie gândită atent |
+| **Comparare și dovezi (fișier + pagină)** | Două surse pot fi afișate una lângă alta | Ecran mic, deci surse afișate pe rând sau în file |
+| **Deployment** | Site publicat online împreună cu backend-ul | Backend online; aplicația distribuită ca APK sau prin Expo (iPhone mai complicat) |
+| **Avantaje** | Mai rapid de realizat, mai ușor de arătat la demo (un link) | Mai aproape de utilizarea reală pe documente și capturi, face poze direct |
+| **Dezavantaje** | Mai puțin natural pentru capturi și poze | Mai multă muncă la interfață, distribuție mai complicată |
+
+Trebuie să mă decid.
+
 ### Tehnologii propuse (de confirmat)
 
-React + TypeScript, Python + FastAPI, PostgreSQL + pgvector, Docling / PyMuPDF, Tesseract (bază OCR), Claude API (model principal), Pydantic, Docker pe un server în cloud, GitHub Actions. Cheile API rămân doar pe server.
+Interfață web (React + TypeScript) sau mobilă (React Native + Expo + TypeScript), Python + FastAPI, PostgreSQL + pgvector, Docling / PyMuPDF, Tesseract (bază OCR), Claude API (model principal), Pydantic, Docker pe un server în cloud, GitHub Actions. Cheile API rămân doar pe server.
 
 ### Diagrame de realizat
 
 - [ ] use case
 - [ ] user flow
-- [ ] mockup-uri UX (Figma)
+- [ ] mockup-uri UX (Figma), pentru varianta aleasă (web sau mobil)
 - [ ] arhitectură
 - [ ] secvență (Q&A, extracție)
 - [ ] model de date (ER)
